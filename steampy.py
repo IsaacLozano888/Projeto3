@@ -44,7 +44,7 @@ class SteamPy:
                 if not linhas:
                     return
 
-                # Ignora o cabeçalho
+              
                 linhas = linhas[1:]
 
                 for linha in linhas:
@@ -52,7 +52,7 @@ class SteamPy:
                     if not linha:
                         continue
 
-                    # Utiliza a nossa nova função em vez do .split(',')
+
                     dados = self._separar_linha_csv(linha)
 
                     if len(dados) >= 13:
