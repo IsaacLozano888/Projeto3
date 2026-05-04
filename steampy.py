@@ -11,6 +11,23 @@ class SteamPy:
         self.historico = []
         self.tempos_por_jogo = {}
 
+    def _separar_linha_csv(self, linha):
+        resultado = []
+        campo_atual = []
+        dentro_aspas = False
+        
+        for char in linha:
+            if char == '"':
+                dentro_aspas = not dentro_aspas # Alterna o estado ao encontrar aspas
+            elif char == ',' and not dentro_aspas:
+                resultado.append(''.join(campo_atual).strip())
+                campo_atual = []
+            else:
+                campo_atual.append(char)
+                
+        resultado.append(''.join(campo_atual).strip())
+        return resultado
+
     def carregar_jogos(self, nome_arquivo):
         if not os.path.exists(nome_arquivo):
             print(f"[ERRO] Arquivo '{nome_arquivo}' nao encontrado!")
@@ -27,6 +44,7 @@ class SteamPy:
                 if not linhas:
                     return
 
+                # Ignora o cabeçalho
                 linhas = linhas[1:]
 
                 for linha in linhas:
@@ -34,7 +52,8 @@ class SteamPy:
                     if not linha:
                         continue
 
-                    dados = linha.split(',')
+                    # Utiliza a nossa nova função em vez do .split(',')
+                    dados = self._separar_linha_csv(linha)
 
                     if len(dados) >= 13:
                         try:

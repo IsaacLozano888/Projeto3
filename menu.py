@@ -1,21 +1,12 @@
-# ============================================================
-# menu.py - Menu interativo do sistema SteamPy
-# ============================================================
-# Menu principal que permite usuario interagir com o sistema
-# 19 opcoes conforme especificado no PDF
-
 from steampy import SteamPy
 
 
 def menu(sistema):
-    # Loop principal do menu
-    # Exibe opcoes e executa acoes baseado na escolha do usuario
 
     while True:
         print(f"\n{'='*50}")
         print(f"       STEAMPY - Menu Principal")
         print(f"{'='*50}")
-        # Exibe todas as 19 opcoes do menu
         print("  1.  Carregar catalogo")
         print("  2.  Listar jogos")
         print("  3.  Buscar jogo por nome")
@@ -39,9 +30,7 @@ def menu(sistema):
 
         opcao = input("  Escolha uma opcao: ").strip()
 
-        # ---- opcao 1: carregar catalogo ----
         if opcao == '1':
-            # Carrega o arquivo dataset.csv com todos os jogos
             sistema.carregar_jogos('dataset.csv')
 
         # ---- opcao 2: listar jogos ----
